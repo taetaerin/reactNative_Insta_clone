@@ -1,14 +1,40 @@
 import { View, Text, Touchable, TouchableOpacity } from 'react-native'
 import React, { useState } from 'react'
 import Feater from 'react-native-vector-icons/Feather'
+import { useNavigation } from '@react-navigation/native';
 
-const ProfileButton = ({id}) => {
+const ProfileButton = ({id, name, accountName, profileImage}) => {
   const [follow, setFollow] = useState(false);
+  const navigation = useNavigation();
 
   return (
     <>
         {id === 0 ? (
-            <View>
+            <View style={{
+                paddingVertical: 5,
+                paddingHorizontal: 10
+            }}>
+                <TouchableOpacity
+                    onPress={() => {
+                        navigation.push('EditProfile', {
+                            name,
+                            accountName,
+                            profileImage
+                        })
+                    }}
+                    style={{width: '100%'}}
+                >
+                    <View style={{width: '100%', height: 35, borderColor: '#DEDEDE', borderWidth: 1, borderRadius:5, justifyContent:'center', alignItems: 'center'}}>
+                        <Text 
+                            style={{
+                                fontWeight: 'bold',
+                                fontSize: 14,
+                                letterSpacing: 1,
+                                opacity: 0.8
+                            }}
+                        >프로필 수정</Text>
+                    </View>
+                </TouchableOpacity>
 
             </View>
         ) : (
